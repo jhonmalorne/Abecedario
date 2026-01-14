@@ -3,144 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genio Visión - Aprende Jugando</title>
+    <title>Genio Visión - Aprende a Leer</title>
     <style>
         :root {
-            --p-rosa: #FFD1DC;
-            --p-azul: #AEC6CF;
-            --p-verde: #B3E5BE;
-            --p-amarillo: #FFF9CC;
-            --p-morado: #DCD0FF;
-            --texto-oscuro: #1A237E; /* Azul oscuro para lectura clara */
-            --error-rojo: #FF4D4D;
-            --exito-verde: #4CAF50;
+            --pastel-blue: #B3E5FC;
+            --pastel-pink: #F8BBD0;
+            --pastel-green: #C8E6C9;
+            --pastel-yellow: #FFF9C4;
+            --pastel-purple: #E1BEE7;
+            --text-main: #000080; /* Azul Oscuro para máxima legibilidad */
+            --text-black: #1a1a1a;
+            --error-red: #D32F2F;
+            --success-green: #388E3C;
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background-color: #ffffff;
             margin: 0;
-            background-color: #FDFDFD;
-            color: var(--texto-oscuro);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- SECCIÓN MARKETING: GENIO VISIÓN --- */
+        /* --- MARKETING & BRANDING: GENIO VISIÓN --- */
         header {
-            background-color: var(--p-azul);
+            background-color: var(--pastel-blue);
             padding: 20px;
             text-align: center;
-            border-bottom: 5px solid var(--p-morado);
+            border-bottom: 4px solid var(--pastel-purple);
         }
 
-        .hero-title {
-            font-size: 3rem;
+        .logo-escuela {
+            font-size: 2.8rem;
             margin: 0;
-            color: #000;
+            color: var(--text-black);
             text-shadow: 2px 2px white;
         }
 
-        .school-banner {
+        .info-escuela {
             background: white;
-            padding: 15px;
+            max-width: 800px;
             margin: 15px auto;
-            max-width: 700px;
+            padding: 15px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
         }
 
-        .btn-contacto {
-            background-color: var(--exito-verde);
+        .btn-llamar {
+            display: inline-block;
+            background-color: var(--success-green);
             color: white;
             padding: 12px 25px;
-            text-decoration: none;
             border-radius: 50px;
+            text-decoration: none;
             font-weight: bold;
-            display: inline-block;
-            margin: 10px;
-            border: 2px solid var(--texto-oscuro);
+            margin-top: 10px;
+            transition: transform 0.2s;
         }
 
-        /* --- MALLA DE GLOBOS (INICIO) --- */
-        .main-menu {
-            padding: 40px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        .btn-llamar:hover { transform: scale(1.05); }
+
+        /* --- GRID DE GLOBOS (ESTILO LECTORCITO) --- */
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 20px;
-            max-width: 1100px;
+            padding: 40px 20px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        .globo {
-            width: 90px;
-            height: 110px;
+        .balloon {
+            height: 120px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
             font-weight: bold;
+            color: var(--text-black); /* Letras negras para visualización */
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.1);
             position: relative;
-            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1);
-            color: var(--texto-oscuro);
         }
 
-        .globo::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            width: 2px;
-            height: 15px;
-            background: #999;
-        }
+        .balloon:hover { transform: translateY(-15px) rotate(5deg); }
 
-        .globo:hover { transform: scale(1.1) translateY(-10px); }
-
-        /* --- PORTAL DE EJERCICIOS --- */
-        #game-screen {
+        /* --- INTERFAZ DE EJERCICIO --- */
+        #game-portal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
-            z-index: 100;
+            background: #fff;
+            z-index: 1000;
             flex-direction: column;
             align-items: center;
+            overflow-y: auto;
+            padding-bottom: 50px;
+        }
+
+        .exercise-header {
+            width: 100%;
             padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .exercise-card {
-            background: var(--p-amarillo);
-            padding: 30px;
-            border-radius: 30px;
-            width: 90%;
-            max-width: 600px;
+            background: var(--pastel-yellow);
             text-align: center;
-            border: 4px solid var(--p-azul);
+            border-bottom: 5px solid var(--pastel-pink);
         }
 
-        .drop-area {
+        .word-to-learn {
+            font-size: 4rem;
+            letter-spacing: 10px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            margin: 20px 0;
+            font-weight: 900;
+        }
+
+        .drop-zone {
             display: flex;
-            justify-content: center;
             gap: 15px;
-            margin: 40px 0;
-            min-height: 80px;
+            margin: 30px 0;
+            min-height: 100px;
         }
 
         .slot {
-            width: 100px;
-            height: 80px;
-            border: 3px dashed var(--texto-oscuro);
+            width: 110px;
+            height: 90px;
+            border: 4px dashed var(--text-main);
             border-radius: 15px;
-            background: rgba(255,255,255,0.5);
-            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2rem;
+            background: #f9f9f9;
         }
 
         .syllable-pool {
@@ -148,204 +147,213 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
+            padding: 20px;
+            max-width: 800px;
         }
 
-        .syllable {
-            padding: 15px 25px;
+        .syllable-card {
+            padding: 20px 30px;
             background: white;
-            border: 3px solid var(--texto-oscuro);
+            border: 3px solid var(--text-main);
             border-radius: 15px;
             font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-main);
             cursor: pointer;
-            user-select: none;
-            transition: 0.2s;
+            box-shadow: 0 5px 0 var(--text-main);
+            transition: 0.1s;
         }
 
-        /* ESTADOS DE ERROR Y EXITO */
-        .slot.error {
-            background-color: var(--error-rojo) !important;
-            color: white;
-            border-color: #900;
+        .syllable-card:active {
+            transform: translateY(4px);
+            box-shadow: none;
         }
 
-        .slot.success {
-            background-color: var(--exito-verde) !important;
+        /* --- ESTADOS DE ERROR --- */
+        .slot.wrong {
+            background-color: var(--error-red);
+            border-color: #800;
             color: white;
-            border-color: #1B5E20;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            25% {transform: translateX(-10px);}
+            75% {transform: translateX(10px);}
         }
 
         /* --- FOOTER --- */
         footer {
-            background-color: #222;
-            color: white;
+            background: #222;
+            color: #ddd;
             padding: 30px;
             text-align: center;
             margin-top: auto;
         }
 
-        footer a { color: var(--p-azul); text-decoration: none; }
+        footer a { color: var(--pastel-blue); text-decoration: none; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="hero-title">🎈 Genio Visión 🎈</h1>
-        <div class="school-banner">
-            <p><strong>Ubicación:</strong> Los Guayos, referencia por el elevado (frente al globo informativo).</p>
-            <a href="https://maps.app.goo.gl/Yco82LzVs3sJVcDS7" target="_blank" style="color:var(--texto-oscuro); font-weight:bold;">📍 Ver Mapa de la Escuela</a>
+        <h1 class="logo-escuela">Genio Visión</h1>
+        <div class="info-escuela">
+            <p><strong>Ubicación:</strong> Los Guayos, referencia por el elevado.</p>
+            <a href="https://maps.app.goo.gl/Yco82LzVs3sJVcDS7" target="_blank" style="color:var(--text-main); font-weight:bold;">📍 Haz clic aquí para ver nuestra ubicación (Globo)</a>
             <br><br>
-            <a href="tel:04244517644" class="btn-contacto">Inscribir al niño: 0424-4517644</a>
+            <a href="tel:04244517644" class="btn-llamar">📞 Inscribir al niño: 0424-4517644</a>
         </div>
     </header>
 
-    <main class="main-menu" id="alphabet-grid"></main>
+    <main class="alphabet-grid" id="grid"></main>
 
-    <div id="game-screen">
-        <button onclick="closeGame()" style="align-self: flex-start; padding: 10px;">⬅ Volver</button>
-        <div class="exercise-card">
-            <h2 id="letter-title">Letra A</h2>
-            <p id="progreso">Ejercicio 1 de 15</p>
-            <h3 style="color: #000;">Forma la palabra:</h3>
-            
-            <div class="drop-area" id="drop-area"></div>
-            
-            <div class="syllable-pool" id="syllable-pool"></div>
-            
-            <p id="msg-feedback" style="font-weight:bold; margin-top:20px; font-size:1.5rem;"></p>
+    <div id="game-portal">
+        <div class="exercise-header">
+            <button onclick="closePortal()" style="float:left; padding:10px; border-radius:10px; cursor:pointer;">⬅ VOLVER</button>
+            <h2 id="current-letter-title" style="margin:0;">Letra A</h2>
+            <p id="exercise-counter">Ejercicio 1 de 15</p>
         </div>
+
+        <div class="word-to-learn" id="word-display">PALABRA</div>
+        
+        <p style="font-size: 1.2rem;">Arma la palabra seleccionando las sílabas correctas:</p>
+        
+        <div class="drop-zone" id="slots-container"></div>
+        <div class="syllable-pool" id="pool-container"></div>
+
+        <div id="feedback" style="font-size: 2rem; margin-top: 20px; height: 40px;"></div>
     </div>
 
     <footer>
-        <p>Agradecimientos a la empresa de marketing <a href="https://github.com/jhonmalorne/nexus.net/deployments" target="_blank">Nexus Marketing.Net</a></p>
-        <p>Diseño Pedagógico Especializado | Contacto: 0424-4525765</p>
+        <p>Agradecimientos a la empresa de marketing <strong><a href="https://github.com/jhonmalorne/nexus.net/deployments" target="_blank">Nexus Marketing.Net</a></strong></p>
+        <p>Diseño Web Profesional | Contacto: <strong>0424-4525765</strong></p>
     </footer>
 
     <script>
         const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
-        const colors = ['var(--p-rosa)', 'var(--p-azul)', 'var(--p-verde)', 'var(--p-amarillo)', 'var(--p-morado)'];
+        const colors = ['#B3E5FC', '#F8BBD0', '#C8E6C9', '#FFF9C4', '#E1BEE7'];
         
-        // Base de datos de palabras (Ejemplo pedagógico)
-        // He creado una lógica que genera 15 ejercicios por letra automáticamente.
-        const wordsDB = {
-            'M': ['MAMA', 'MIMO', 'MEMA', 'MAMU', 'MESA', 'MISA', 'MULA', 'MONO', 'MOTO', 'MAPA', 'MAIZ', 'META', 'MODA', 'MURO', 'MANO'],
-            'P': ['PAPA', 'PIPA', 'PEPE', 'PUMA', 'PASO', 'PESO', 'PISO', 'POMO', 'PALA', 'PERA', 'PILA', 'PICO', 'POZO', 'PUERTA', 'PIANO'],
-            // Las demás letras se autogeneran con sílabas comunes para cumplir el requisito de 15
+        // --- BASE DE DATOS PEDAGÓGICA (15 EJERCICIOS POR LETRA) ---
+        // Aquí he estructurado la lógica para que cada letra tenga sus palabras.
+        const exercisesData = {
+            'M': ['MAMA', 'MIMO', 'MESA', 'MULA', 'MAMU', 'MATE', 'MONO', 'MOTO', 'MAPA', 'META', 'MISA', 'MURO', 'MANO', 'MAIZ', 'MODA'],
+            'P': ['PAPA', 'PIPA', 'PEPE', 'PUMA', 'PASO', 'PISO', 'PALA', 'PERA', 'PILA', 'PICO', 'POZO', 'PIANO', 'POMO', 'PUÑO', 'PESO'],
+            'S': ['SAPO', 'SUMA', 'SOPA', 'SOLA', 'SEIS', 'SACO', 'SEDA', 'SILLA', 'SIRENA', 'SALA', 'SOPA', 'SUELO', 'SIMA', 'SOPA', 'SANO']
+            // El script autogenerará palabras para el resto de letras si no están definidas
         };
 
         let currentLetter = "";
-        let currentExercise = 0;
-        let selectedSyllables = [];
+        let currentIndex = 0;
+        let userSelection = [];
 
-        // Generar malla inicial
-        const grid = document.getElementById('alphabet-grid');
-        alphabet.forEach((l, i) => {
-            const g = document.createElement('div');
-            g.className = 'globo';
-            g.textContent = l;
-            g.style.backgroundColor = colors[i % colors.length];
-            g.onclick = () => startGame(l);
-            grid.appendChild(g);
+        // Generar Globos
+        const grid = document.getElementById('grid');
+        alphabet.forEach((letter, i) => {
+            const b = document.createElement('div');
+            b.className = 'balloon';
+            b.textContent = letter;
+            b.style.backgroundColor = colors[i % colors.length];
+            b.onclick = () => openPortal(letter);
+            grid.appendChild(b);
         });
 
-        function startGame(letter) {
+        function openPortal(letter) {
             currentLetter = letter;
-            currentExercise = 0;
-            document.getElementById('game-screen').style.display = 'flex';
-            loadLevel();
+            currentIndex = 0;
+            document.getElementById('game-portal').style.display = 'flex';
+            loadExercise();
         }
 
-        function closeGame() {
-            document.getElementById('game-screen').style.display = 'none';
+        function closePortal() {
+            document.getElementById('game-portal').style.display = 'none';
         }
 
-        function loadLevel() {
-            const msg = document.getElementById('msg-feedback');
-            msg.textContent = "";
-            document.getElementById('letter-title').textContent = `Letra ${currentLetter}`;
-            document.getElementById('progreso').textContent = `Ejercicio ${currentExercise + 1} de 15`;
-            
-            // Obtener palabra (o generar una si no está en DB)
-            let word = (wordsDB[currentLetter] && wordsDB[currentLetter][currentExercise]) 
-                       ? wordsDB[currentLetter][currentExercise] 
-                       : currentLetter + "A" + "LA" + (currentExercise);
-            
-            // Dividir en sílabas (simulado para este ejemplo)
-            const correctSyllables = splitInSyllables(word);
-            const poolSyllables = [...correctSyllables].sort(() => Math.random() - 0.5);
-            
-            // Añadir distractores pedagógicos (Marketing mental: reto controlado)
-            poolSyllables.push("XO", "ZA");
+        function loadExercise() {
+            const letterTitle = document.getElementById('current-letter-title');
+            const counter = document.getElementById('exercise-counter');
+            const wordDisplay = document.getElementById('word-display');
+            const slotsContainer = document.getElementById('slots-container');
+            const poolContainer = document.getElementById('pool-container');
+            const feedback = document.getElementById('feedback');
 
-            const dropArea = document.getElementById('drop-area');
-            const poolArea = document.getElementById('syllable-pool');
-            dropArea.innerHTML = "";
-            poolArea.innerHTML = "";
-            selectedSyllables = [];
+            // Limpiar
+            slotsContainer.innerHTML = "";
+            poolContainer.innerHTML = "";
+            feedback.textContent = "";
+            userSelection = [];
 
-            correctSyllables.forEach(() => {
-                const slot = document.createElement('div');
-                slot.className = 'slot';
-                dropArea.appendChild(slot);
+            letterTitle.textContent = `Letra ${currentLetter}`;
+            counter.textContent = `Ejercicio ${currentIndex + 1} de 15`;
+
+            // Obtener palabra
+            let word = (exercisesData[currentLetter]) ? exercisesData[currentLetter][currentIndex] : currentLetter + "A" + "LA";
+            wordDisplay.textContent = word;
+
+            // Separar en sílabas (lógica de 2 en 2 para este ejemplo educativo)
+            let syllables = word.match(/.{1,2}/g); 
+            
+            // Crear Slots
+            syllables.forEach(() => {
+                const s = document.createElement('div');
+                s.className = 'slot';
+                slotsContainer.appendChild(s);
             });
 
-            poolSyllables.forEach(s => {
-                const syl = document.createElement('div');
-                syl.className = 'syllable';
-                syl.textContent = s;
-                syl.onclick = () => handleSelect(syl, s, correctSyllables);
-                poolArea.appendChild(syl);
+            // Crear Pool de opciones (mezclado + distractores)
+            let options = [...syllables, "TA", "LO", "RE"].sort(() => Math.random() - 0.5);
+            
+            options.forEach(sylText => {
+                const card = document.createElement('div');
+                card.className = 'syllable-card';
+                card.textContent = sylText;
+                card.onclick = () => selectSyllable(card, sylText, syllables);
+                poolContainer.appendChild(card);
             });
         }
 
-        function handleSelect(element, val, correctArr) {
+        function selectSyllable(card, text, correctSyllables) {
             const slots = document.querySelectorAll('.slot');
             let nextSlot = Array.from(slots).find(s => !s.textContent);
-            
-            if (nextSlot) {
-                nextSlot.textContent = val;
-                element.style.visibility = 'hidden';
-                selectedSyllables.push(val);
 
-                if (selectedSyllables.length === correctArr.length) {
-                    checkResult(correctArr);
+            if (nextSlot) {
+                nextSlot.textContent = text;
+                card.style.visibility = "hidden";
+                userSelection.push(text);
+
+                if (userSelection.length === correctSyllables.length) {
+                    checkResult(correctSyllables);
                 }
             }
         }
 
-        function checkResult(correctArr) {
+        function checkResult(correctSyllables) {
             const slots = document.querySelectorAll('.slot');
-            const isCorrect = JSON.stringify(selectedSyllables) === JSON.stringify(correctArr);
+            const feedback = document.getElementById('feedback');
+            const isCorrect = JSON.stringify(userSelection) === JSON.stringify(correctSyllables);
 
             if (isCorrect) {
-                slots.forEach(s => s.classList.add('success'));
-                document.getElementById('msg-feedback').textContent = "¡GENIAL! ✨";
+                feedback.textContent = "¡Excelente! 🌟";
+                feedback.style.color = "var(--success-green)";
                 setTimeout(() => {
-                    if (currentExercise < 14) {
-                        currentExercise++;
-                        loadLevel();
+                    if (currentIndex < 14) {
+                        currentIndex++;
+                        loadExercise();
                     } else {
-                        alert("¡Felicidades! Completaste la letra " + currentLetter);
-                        closeGame();
+                        alert("¡Felicidades! Terminaste la tarea de la letra " + currentLetter);
+                        closePortal();
                     }
                 }, 1500);
             } else {
-                slots.forEach(s => s.classList.add('error'));
-                document.getElementById('msg-feedback').textContent = "INTÉNTALO DE NUEVO 🔴";
+                feedback.textContent = "¡Inténtalo de nuevo! ❌";
+                feedback.style.color = "var(--error-red)";
+                slots.forEach(s => s.classList.add('wrong'));
+                
                 setTimeout(() => {
-                    loadLevel(); // Reiniciar nivel
-                }, 1500);
+                    loadExercise(); // Reiniciar el ejercicio
+                }, 1200);
             }
-        }
-
-        // Función simple para separar sílabas (simplificada para prototipo)
-        function splitInSyllables(word) {
-            // En un sistema real usarías una librería de silabeo. 
-            // Aquí dividimos cada 2 letras para el ejemplo.
-            let res = [];
-            for (let i = 0; i < word.length; i += 2) {
-                res.push(word.substring(i, i + 2));
-            }
-            return res;
         }
     </script>
 </body>
