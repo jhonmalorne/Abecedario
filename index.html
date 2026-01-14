@@ -11,76 +11,79 @@
             --p-verde: #C8E6C9;
             --p-amarillo: #FFF9C4;
             --p-morado: #E1BEE7;
-            --texto-oscuro: #001F3F; /* Azul oscuro/Negro para legibilidad */
-            --rojo-error: #D32F2F;
-            --verde-exito: #388E3C;
+            --texto-oscuro: #001A33; /* Azul casi negro para máxima visibilidad */
+            --rojo-error: #FF3B30;
+            --verde-exito: #4CD964;
         }
 
         body {
-            font-family: 'Comic Sans MS', sans-serif;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
             background-color: #ffffff;
             margin: 0;
+            color: var(--texto-oscuro);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            color: var(--texto-oscuro);
         }
 
-        /* --- MARKETING: GENIO VISIÓN --- */
+        /* --- MARKETING & UBICACIÓN --- */
         header {
             background-color: var(--p-azul);
             padding: 20px;
             text-align: center;
-            border-bottom: 5px solid var(--p-morado);
+            border-bottom: 6px solid var(--p-morado);
         }
 
-        .header-container {
+        .header-card {
             background: white;
-            max-width: 900px;
-            margin: 10px auto;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        .btn-contacto {
+        .btn-llamar {
             display: inline-block;
             background-color: var(--verde-exito);
             color: white;
-            padding: 12px 25px;
+            padding: 15px 30px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            margin-top: 10px;
-            border: 2px solid var(--texto-oscuro);
+            font-size: 1.2rem;
+            margin-top: 15px;
+            border: 3px solid var(--texto-oscuro);
         }
 
         /* --- GRID DE GLOBOS --- */
         .grid-abecedario {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 20px;
             padding: 40px 20px;
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .globo {
-            height: 140px;
+            height: 130px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             font-weight: bold;
-            color: #1a1a1a;
+            color: #000;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            box-shadow: inset -5px -10px 15px rgba(0,0,0,0.1);
             position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .globo:hover { transform: translateY(-15px); }
+        .globo:hover { transform: translateY(-10px) scale(1.1); }
+        .globo::after { content: ''; position: absolute; bottom: -20px; width: 2px; height: 30px; background: #999; }
 
         /* --- INTERFAZ DE EJERCICIO --- */
         #portal-juego {
@@ -92,39 +95,40 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            overflow-y: auto;
         }
 
-        .palabra-superior {
-            font-size: 4rem;
-            color: var(--texto-oscuro);
+        .palabra-guia {
+            font-size: 4.5rem;
             font-weight: bold;
+            color: var(--texto-oscuro);
             margin: 20px 0;
             text-transform: uppercase;
-            letter-spacing: 5px;
         }
 
-        .zona-drop {
+        .zona-slots {
             display: flex;
             gap: 15px;
             margin: 30px 0;
         }
 
-        .hueco {
-            width: 140px;
+        .slot {
+            width: 130px;
             height: 100px;
-            border: 4px dashed var(--texto-oscuro);
-            border-radius: 15px;
+            border: 5px dashed var(--texto-oscuro);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
-            background: #f9f9f9;
+            background: #fdfdfd;
+            font-weight: bold;
         }
 
-        .hueco.error { background-color: var(--rojo-error) !important; color: white; }
-        .hueco.exito { background-color: var(--verde-exito) !important; color: white; }
+        .slot.error { background-color: var(--rojo-error) !important; color: white; animation: shake 0.5s; }
+        .slot.success { background-color: var(--verde-exito) !important; color: white; }
 
-        .opciones-pool {
+        .pool-silabas {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -132,22 +136,26 @@
             max-width: 800px;
         }
 
-        .silaba-card {
-            padding: 20px 35px;
+        .silaba-btn {
+            padding: 20px 40px;
             background: white;
-            border: 3px solid var(--texto-oscuro);
-            border-radius: 15px;
+            border: 4px solid var(--texto-oscuro);
+            border-radius: 20px;
             font-size: 2.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 6px 0 var(--texto-oscuro);
+            box-shadow: 0 8px 0 var(--texto-oscuro);
         }
+
+        .silaba-btn:active { transform: translateY(4px); box-shadow: none; }
+
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
 
         /* --- FOOTER --- */
         footer {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 30px;
+            background-color: #111;
+            color: #eee;
+            padding: 40px 20px;
             text-align: center;
             margin-top: auto;
         }
@@ -156,118 +164,143 @@
 <body>
 
     <header>
-        <h1 style="font-size: 3.5rem; margin: 0;">Genio Visión</h1>
-        <div class="header-container">
-            <p><strong>📍 Ubicación:</strong> Los Guayos, Carabobo. Ref: Cerca del Elevado.</p>
-            <a href="https://maps.app.goo.gl/Yco82LzVs3sJVcDS7" target="_blank" style="color:var(--texto-oscuro);">📍 Ver en el Mapa (Globo de ubicación)</a>
-            <br>
-            <a href="tel:04244517644" class="btn-contacto">Inscripciones: 0424-4517644</a>
+        <div class="header-card">
+            <h1 style="font-size: 3rem; margin: 0;">Genio Visión</h1>
+            <p><strong>Escuela de Tareas Dirigidas en Los Guayos</strong></p>
+            <p>Referencia: Cerca del <strong>Elevado</strong> con ubicación aquí: 
+               <a href="https://maps.app.goo.gl/Yco82LzVs3sJVcDS7" target="_blank" style="color:var(--texto-oscuro);">📍 Globo de Ubicación</a>
+            </p>
+            <a href="tel:04244517644" class="btn-llamar">📞 Inscríbelo: 0424-4517644</a>
         </div>
     </header>
 
-    <main class="grid-abecedario" id="main-grid"></main>
+    <main class="grid-abecedario" id="grid"></main>
 
     <div id="portal-juego">
-        <button onclick="cerrar()" style="padding: 10px; cursor:pointer;">⬅ Volver</button>
-        <p id="contador" style="font-weight:bold; margin-top:10px;"></p>
-        <div class="palabra-superior" id="guia-visual"></div>
-        <div class="zona-drop" id="zona-huecos"></div>
-        <div class="opciones-pool" id="pool"></div>
+        <button onclick="cerrar()" style="padding: 10px 20px; font-weight: bold; cursor: pointer;">⬅ VOLVER AL ABECEDARIO</button>
+        <p id="progreso" style="font-weight: bold; margin-top: 15px; font-size: 1.2rem;">Ejercicio 1 de 15</p>
+        <div class="palabra-guia" id="hint">PALABRA</div>
+        <div class="zona-slots" id="slots-container"></div>
+        <div class="pool-silabas" id="pool"></div>
+        <div id="status" style="font-size: 2rem; font-weight: bold; margin-top: 20px;"></div>
     </div>
 
     <footer>
-        <p>Agradecimientos a la empresa de marketing <a href="https://github.com/jhonmalorne/nexus.net/deployments" target="_blank" style="color:var(--p-azul);">Nexus Marketing.Net</a></p>
-        <p>Diseño y Soporte: 0424-4525765</p>
+        <p>Agradecimientos a la empresa de marketing <strong><a href="https://github.com/jhonmalorne/nexus.net/deployments" target="_blank" style="color:var(--p-azul);">Nexus Marketing.Net</a></strong></p>
+        <p>Desarrollo Web & Estrategia | 📲 Celular: 0424-4525765</p>
     </footer>
 
     <script>
-        const baseDatos = {
-            'K': [
-                ['KO', 'A', 'LA'], ['KI', 'WI'], ['KIOS', 'CO'], ['KA', 'RA', 'TE'], ['KI', 'LO'], 
-                ['KET', 'CHUP'], ['KAR', 'TING'], ['KA', 'YAK'], ['KE', 'RO', 'SE', 'NE'], ['KEV', 'LAR'], 
-                ['KA', 'KA', 'TÚ', 'A'], ['KI', 'LO', 'GRA', 'MO'], ['KI', 'LÓ', 'ME', 'TRO'], ['KI', 'MO', 'NO'], ['KUNG', 'FÚ']
-            ],
-            'Q': [
-                ['QUE', 'SO'], ['QUIN', 'CE'], ['QUE', 'MAR'], ['QUIE', 'RO'], ['QUIN', 'TO'], 
-                ['QUE', 'RI', 'DO'], ['QUÍ', 'MI', 'CA'], ['QUI', 'TAR'], ['QUE', 'JA'], ['QUE', 'RU', 'BÍN'], 
-                ['QUIE', 'TO'], ['QUI', 'NUA'], ['QUE', 'RER'], ['QUE', 'RE', 'MOS'], ['PA', 'QUE', 'TE']
-            ],
-            // ... (Añadir el resto de letras A-Z con el mismo formato de 15 arrays cada una)
-            'M': [['MA', 'MÁ'], ['ME', 'SA'], ['MI', 'MO'], ['MU', 'LA'], ['MO', 'TO'], ['MA', 'NO'], ['MA', 'PA'], ['ME', 'TA'], ['MI', 'SA'], ['MO', 'NO'], ['MU', 'RO'], ['MA', 'ÍZ'], ['MO', 'DA'], ['MU', 'CHO'], ['MA', 'RE']]
+        // --- BASE DE DATOS LINGÜÍSTICA: 27 LETRAS x 15 EJERCICIOS ---
+        const data = {
+            'A': [['A', 'GUA'], ['A', 'BE', 'JA'], ['ÁR', 'BOL'], ['A', 'VI', 'ÓN'], ['A', 'NI', 'LLO'], ['A', 'RE', 'PA'], ['AR', 'CO'], ['A', 'ZU', 'CAR'], ['AL', 'MA'], ['A', 'MOR'], ['A', 'VIS', 'PA'], ['A', 'CEI', 'TE'], ['A', 'RO'], ['AN', 'CLA'], ['A', 'VES']],
+            'B': [['BO', 'TA'], ['BU', 'RRO'], ['BAR', 'CO'], ['BÚ', 'HO'], ['BE', 'BÉ'], ['BA', 'TA'], ['BA', 'LLE', 'NA'], ['BI', 'CI'], ['BO', 'LA'], ['BO', 'TÓN'], ['BA', 'RA'], ['BU', 'QUE'], ['BLAN', 'CO'], ['BRA', 'ZO'], ['BAL', 'DE']],
+            'C': [['CA', 'SA'], ['CO', 'CO'], ['CU', 'NA'], ['CA', 'MA'], ['CAR', 'RO'], ['CE', 'NA'], ['CIE', 'LO'], ['CO', 'LA'], ['CUEN', 'TO'], ['CA', 'FÉ'], ['CA', 'PA'], ['CO', 'PA'], ['CIS', 'NE'], ['CE', 'RO'], ['CO', 'NE', 'JO']],
+            'D': [['DA', 'DO'], ['DE', 'DO'], ['DIEN', 'TE'], ['DI', 'NO'], ['DUL', 'CE'], ['DA', 'MA'], ['DOR', 'MIR'], ['DI', 'CHO'], ['DIA', 'BLO'], ['DUE', 'NDE'], ['DO', 'NA'], ['DAR', 'DO'], ['DÍ', 'A'], ['DUE', 'ÑO'], ['DI', 'CHA']],
+            'E': [['ES', 'CUE', 'LA'], ['E', 'NA', 'NO'], ['ES', 'CO', 'BA'], ['ES', 'PE', 'JO'], ['ES', 'TRE', 'LLA'], ['E', 'LO', 'TE'], ['E', 'RI', 'ZO'], ['ES', 'PA', 'DA'], ['E', 'MÚ'], ['E', 'XA', 'MEN'], ['EL', 'FA'], ['ES', 'TU', 'FA'], ['E', 'JE'], ['E', 'CO'], ['E', 'DAD']],
+            'F': [['FO', 'CA'], ['FO', 'TO'], ['FUE', 'GO'], ['FA', 'MA'], ['FA', 'SE'], ['FA', 'RO'], ['FIES', 'TA'], ['FI', 'NA'], ['FO', 'CO'], ['FUER', 'TE'], ['FI', 'LA'], ['FOR', 'MA'], ['FRU', 'TA'], ['FRI', 'JOL'], ['FLOR']],
+            'G': [['GA', 'TO'], ['GO', 'TA'], ['GO', 'MA'], ['GU', 'SA', 'NO'], ['GUA', 'NTE'], ['GA', 'LA'], ['GE', 'MA'], ['GI', 'RA'], ['GOL'], ['GUÍ', 'A'], ['GEN'], ['GOL', 'PE'], ['GA', 'LLO'], ['GO', 'RRA'], ['GUA', 'YA', 'BA']],
+            'H': [['HA', 'DA'], ['HIEL', 'O'], ['HI', 'GO'], ['HO', 'JA'], ['HU', 'MO'], ['HO', 'RA'], ['HI', 'LO'], ['HA', 'TO'], ['HUE', 'VO'], ['HIE', 'NA'], ['HO', 'LA'], ['HUER', 'TO'], ['HUE', 'SO'], ['HA', 'BLA'], ['HIER', 'BA']],
+            'I': [['I', 'GUA', 'NA'], ['I', 'GLÚ'], ['IS', 'LA'], ['I', 'DE', 'A'], ['IN', 'DIO'], ['Í', 'TEM'], ['I', 'RIS'], ['I', 'GUAL'], ['I', 'MA', 'GEN'], ['I', 'MÁN'], ['IN', 'CA'], ['IG', 'LE', 'SIA'], ['IM', 'ÁN'], ['IR'], ['I', 'SLAS']],
+            'J': [['JA', 'RRA'], ['JE', 'FE'], ['JI', 'RA', 'FA'], ['JO', 'YA'], ['JU', 'GO'], ['JAU', 'LA'], ['JA', 'BÓN'], ['JO', 'TA'], ['JUEZ'], ['JU', 'LIO'], ['JA', 'CA'], ['JA', 'LE'], ['JE', 'MA'], ['JI', 'RA'], ['JUAN']],
+            'K': [['KO', 'A', 'LA'], ['KI', 'WI'], ['KIOS', 'CO'], ['KA', 'RA', 'TE'], ['KI', 'LO'], ['KET', 'CHUP'], ['KAR', 'TING'], ['KA', 'YAK'], ['KE', 'PI'], ['KE', 'FIR'], ['KAY', 'AK'], ['KAR', 'MA'], ['KI', 'MO', 'NO'], ['KÉ', 'FIR'], ['KA', 'MI', 'KA', 'ZE']],
+            'L': [['LU', 'NA'], ['LO', 'MA'], ['LU', 'PA'], ['LO', 'RO'], ['LA', 'NA'], ['LI', 'MA'], ['LE', 'ÓN'], ['LA', 'TA'], ['LA', 'GO'], ['LE', 'CHE'], ['LI', 'SO'], ['LO', 'NA'], ['LO', 'TE'], ['LUZ'], ['LI', 'RIO']],
+            'M': [['MA', 'MÁ'], ['ME', 'SA'], ['MI', 'MO'], ['MU', 'LA'], ['MO', 'TO'], ['MA', 'NO'], ['MA', 'PA'], ['ME', 'TA'], ['MI', 'SA'], ['MO', 'NO'], ['MU', 'RO'], ['MA', 'ÍZ'], ['MO', 'DA'], ['MU', 'CHO'], ['MA', 'RE']],
+            'N': [['NU', 'BE'], ['NI', 'DO'], ['NO', 'TA'], ['NE', 'NA'], ['NU', 'DO'], ['NA', 'VE'], ['NA', 'RIZ'], ['NE', 'TO'], ['NUEZ'], ['NI', 'LO'], ['NE', 'NE'], ['NA', 'DA'], ['NA', 'TA'], ['NIE', 'VE'], ['NO', 'RA']],
+            'Ñ': [['PI', 'ÑA'], ['U', 'ÑA'], ['BA', 'ÑO'], ['LE', 'ÑA'], ['O', 'TO', 'ÑO'], ['PE', 'ÑA'], ['CA', 'ÑA'], ['SE', 'ÑA'], ['NI', 'ÑO'], ['A', 'ÑO'], ['MO', 'ÑO'], ['PA', 'ÑO'], ['DA', 'ÑO'], ['PU', 'ÑO'], ['ÑÚ']],
+            'O': [['O', 'JO'], ['O', 'SO'], ['O', 'RE', 'JA'], ['O', 'LLA'], ['O', 'RO'], ['O', 'LA'], ['O', 'CHO'], ['O', 'VE', 'JA'], ['O', 'RU', 'GA'], ['O', 'TO', 'ÑO'], ['O', 'ES', 'TE'], ['O', 'GRO'], ['O', 'DIO'], ['O', 'MAR'], ['OR', 'CA']],
+            'P': [['PA', 'PÁ'], ['PE', 'RRO'], ['PIE', 'S'], ['PO', 'MO'], ['PU', 'MA'], ['PE', 'SO'], ['PI', 'SO'], ['PA', 'LA'], ['PA', 'TO'], ['PE', 'RA'], ['PI', 'LA'], ['PI', 'CO'], ['PUER', 'TA'], ['PO', 'LLO'], ['PI', 'PA']],
+            'Q': [['QUE', 'SO'], ['QUIN', 'CE'], ['QUE', 'MAR'], ['QUIE', 'RO'], ['QUIN', 'TO'], ['QUE', 'RI', 'DO'], ['QUÍ', 'MI', 'CA'], ['QUI', 'TAR'], ['QUE', 'JA'], ['QUE', 'RU', 'BÍN'], ['QUIE', 'TO'], ['QUI', 'NUA'], ['QUE', 'RER'], ['RA', 'QUE', 'TA'], ['PA', 'QUE', 'TE']],
+            'R': [['RA', 'NA'], ['RA', 'TÓN'], ['RE', 'LOJ'], ['RÍ', 'O'], ['RUE', 'DA'], ['RO', 'SA'], ['RA', 'MA'], ['RA', 'YO'], ['RE', 'SA'], ['RI', 'SA'], ['RO', 'CA'], ['RU', 'TA'], ['RA', 'DIO'], ['RED'], ['RO', 'PA']],
+            'S': [['SA', 'PO'], ['SO', 'PA'], ['SU', 'MA'], ['SO', 'LA'], ['SE', 'IS'], ['SA', 'CO'], ['SE', 'DA'], ['SI', 'LLA'], ['SA', 'LA'], ['SUE', 'LO'], ['SIER', 'PE'], ['SA', 'NO'], ['SOL'], ['SI', 'RE', 'NA'], ['SU', 'CIO']],
+            'T': [['TA', 'ZA'], ['TE', 'LA'], ['TI', 'RE'], ['TO', 'RO'], ['TU', 'BO'], ['TREN'], ['TIG', 'RE'], ['TOR', 'TU', 'GA'], ['TE', 'CHO'], ['TA', 'LA'], ['TÍ', 'A'], ['TO', 'MA', 'TE'], ['TU', 'TÚ'], ['TRI', 'GO'], ['TÍ', 'O']],
+            'U': [['U', 'VA'], ['U', 'NA'], ['U', 'NO'], ['U', 'ÑAS'], ['UR', 'NA'], ['U', 'RRA', 'CA'], ['U', 'SAR'], ['U', 'NIR'], ['Ú', 'TIL'], ['U', 'SOS'], ['U', 'NI', 'ÓN'], ['U', 'NI', 'DO'], ['Ú', 'NI', 'CO'], ['UR', 'SO'], ['UR', 'GE']],
+            'V': [['VA', 'CA'], ['VE', 'LA'], ['VI', 'NO'], ['VO', 'TO'], ['VUE', 'LO'], ['VA', 'SO'], ['VI', 'DA'], ['VEN', 'TA', 'NA'], ['VER', 'DE'], ['VIA', 'JE'], ['VA', 'LLE'], ['VUE', 'LO'], ['VIEN', 'TO'], ['VO', 'CAL'], ['VÍ', 'A']],
+            'W': [['WAF', 'FLE'], ['WAT', 'TIO'], ['WI', 'FI'], ['WEB'], ['WOK'], ['WAL', 'KMAN'], ['WIND', 'SURF'], ['WHIS', 'KY'], ['WASH'], ['WAG', 'NER'], ['WES', 'TERN'], ['WA', 'TER'], ['WALK'], ['WEEK'], ['WEB']],
+            'X': [['XI', 'LÓ', 'FO', 'NO'], ['TE', 'XTO'], ['HE', 'XA'], ['SE', 'XTO'], ['TA', 'XI'], ['É', 'XI', 'TO'], ['E', 'XA', 'MEN'], ['MÉ', 'XI', 'CO'], ['O', 'XÍ', 'GE', 'NO'], ['MI', 'XTO'], ['AU', 'XI', 'LIO'], ['BO', 'XEO'], ['SA', 'XO'], ['RA', 'YOS', 'X'], ['EX', 'CE', 'SO']],
+            'Y': [['YU', 'CA'], ['YA', 'TE'], ['YE', 'MA'], ['YO', 'YO'], ['YE', 'SO'], ['YUN', 'QUE'], ['YER', 'BA'], ['YA'], ['YO'], ['YE', 'GUA'], ['YA', 'MA'], ['YE', 'MEN'], ['YU', 'TA'], ['YUN', 'TA'], ['YA', 'RE']],
+            'Z': [['ZA', 'PA', 'TO'], ['ZO', 'RRO'], ['ZU', 'MO'], ['ZE', 'TA'], ['ZA', 'RA'], ['ZO', 'NA'], ['ZA', 'RPA'], ['ZO', 'RRI', 'LLO'], ['ZINC'], ['ZA', 'RPA'], ['ZAN', 'JA'], ['ZOR', 'BA'], ['ZOR', 'RU'], ['ZA', 'PE'], ['ZIG', 'ZAG']]
         };
 
         const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
-        const colores = ['var(--p-rosa)', 'var(--p-azul)', 'var(--p-verde)', 'var(--p-amarillo)', 'var(--p-morado)'];
-        let letraActual = '';
+        const colores = ['var(--p-azul)', 'var(--p-rosa)', 'var(--p-verde)', 'var(--p-amarillo)', 'var(--p-morado)'];
+        let letraSel = '';
         let nivel = 0;
-        let seleccion = [];
+        let respuesta = [];
 
-        const grid = document.getElementById('main-grid');
+        const grid = document.getElementById('grid');
         alfabeto.forEach((l, i) => {
-            const g = document.createElement('div');
-            g.className = 'globo';
-            g.textContent = l;
-            g.style.backgroundColor = colores[i % colores.length];
-            g.onclick = () => { letraActual = l; nivel = 0; abrir(); };
-            grid.appendChild(g);
+            const div = document.createElement('div');
+            div.className = 'globo';
+            div.style.backgroundColor = colores[i % colores.length];
+            div.textContent = l;
+            div.onclick = () => { letraSel = l; nivel = 0; abrir(); };
+            grid.appendChild(div);
         });
 
         function abrir() {
             document.getElementById('portal-juego').style.display = 'flex';
-            cargar();
+            cargarNivel();
         }
 
-        function cerrar() { document.getElementById('portal-juego').style.display = 'none'; }
+        function cerrar() {
+            document.getElementById('portal-juego').style.display = 'none';
+        }
 
-        function cargar() {
-            const container = document.getElementById('zona-huecos');
+        function cargarNivel() {
+            const container = document.getElementById('slots-container');
             const pool = document.getElementById('pool');
-            const guia = document.getElementById('guia-visual');
-            const cont = document.getElementById('contador');
+            const hint = document.getElementById('hint');
+            const progreso = document.getElementById('progreso');
+            const status = document.getElementById('status');
+
+            container.innerHTML = ''; pool.innerHTML = ''; status.textContent = ''; respuesta = [];
             
-            container.innerHTML = ''; pool.innerHTML = ''; seleccion = [];
-            
-            // Si la letra no tiene datos, usamos la M por defecto para evitar errores
-            const datos = baseDatos[letraActual] || baseDatos['M'];
-            const silabas = datos[nivel];
-            
-            guia.textContent = silabas.join("");
-            cont.textContent = `Ejercicio ${nivel + 1} de 15`;
+            const silabas = data[letraSel][nivel];
+            hint.textContent = silabas.join("");
+            progreso.textContent = `Letra ${letraSel} - Ejercicio ${nivel + 1} de 15`;
 
             silabas.forEach(() => {
-                const h = document.createElement('div');
-                h.className = 'hueco';
-                container.appendChild(h);
+                const s = document.createElement('div');
+                s.className = 'slot';
+                container.appendChild(s);
             });
 
-            let opciones = [...silabas, "TA", "LO"].sort(() => Math.random() - 0.5);
-            opciones.forEach(s => {
-                const card = document.createElement('div');
-                card.className = 'silaba-card';
-                card.textContent = s;
-                card.onclick = () => {
-                    const hLibre = Array.from(document.querySelectorAll('.hueco')).find(h => !h.textContent);
-                    if(hLibre) {
-                        hLibre.textContent = s;
-                        seleccion.push(s);
-                        if(seleccion.length === silabas.length) verificar(silabas);
+            let opciones = [...silabas, "MA", "TO", "LU"].sort(() => Math.random() - 0.5);
+            opciones.forEach(txt => {
+                const b = document.createElement('button');
+                b.className = 'silaba-btn';
+                b.textContent = txt;
+                b.onclick = () => {
+                    const h = Array.from(document.querySelectorAll('.slot')).find(s => !s.textContent);
+                    if(h) {
+                        h.textContent = txt;
+                        respuesta.push(txt);
+                        if(respuesta.length === silabas.length) verificar(silabas);
                     }
                 };
-                pool.appendChild(card);
+                pool.appendChild(b);
             });
         }
 
         function verificar(correctas) {
-            const huecos = document.querySelectorAll('.hueco');
-            if(JSON.stringify(seleccion) === JSON.stringify(correctas)) {
-                huecos.forEach(h => h.classList.add('exito'));
+            const slots = document.querySelectorAll('.slot');
+            const status = document.getElementById('status');
+            const esCorrecto = JSON.stringify(respuesta) === JSON.stringify(correctas);
+
+            if(esCorrecto) {
+                slots.forEach(s => s.classList.add('success'));
+                status.textContent = "¡MUY BIEN! ⭐";
+                status.style.color = "var(--verde-exito)";
                 setTimeout(() => {
-                    if(nivel < 14) { nivel++; cargar(); }
-                    else { alert("¡Letra completada!"); cerrar(); }
+                    if(nivel < 14) { nivel++; cargarNivel(); }
+                    else { alert("¡Felicidades! Completaste la letra " + letraSel); cerrar(); }
                 }, 1000);
             } else {
-                huecos.forEach(h => h.classList.add('error'));
-                setTimeout(cargar, 1000);
+                slots.forEach(s => s.classList.add('error'));
+                status.textContent = "INTENTA OTRA VEZ ❌";
+                status.style.color = "var(--rojo-error)";
+                setTimeout(cargarNivel, 1000);
             }
         }
     </script>
