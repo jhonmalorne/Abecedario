@@ -3,355 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genio Visión - Aprende a Leer</title>
+    <title>Genio Visión - Escuela de Tareas Dirigidas</title>
     <style>
         :root {
-            --pastel-blue: #B3E5FC;
-            --pastel-pink: #F8BBD0;
-            --pastel-green: #C8E6C9;
-            --pastel-yellow: #FFF9C4;
-            --pastel-purple: #E1BEE7;
-            --text-main: #000080; /* Azul Oscuro para máxima legibilidad */
-            --text-black: #1a1a1a;
-            --error-red: #D32F2F;
-            --success-green: #388E3C;
+            --azul-oscuro: #002366; /* Color para letras arriba y abajo */
+            --negro: #1a1a1a;
+            --pastel-azul: #D1EAFF;
+            --pastel-rosa: #FFD1DC;
+            --pastel-verde: #D1FFD7;
+            --pastel-amarillo: #FFF9C4;
+            --pastel-morado: #E2D1FF;
+            --error-rojo: #FF3B30;
+            --exito-verde: #4CD964;
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-            background-color: #ffffff;
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
             margin: 0;
-            color: var(--text-main);
+            background-color: #ffffff;
+            color: var(--azul-oscuro);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- MARKETING & BRANDING: GENIO VISIÓN --- */
+        /* --- HEADER & MARKETING --- */
         header {
-            background-color: var(--pastel-blue);
-            padding: 20px;
+            background-color: var(--pastel-azul);
+            padding: 30px 20px;
             text-align: center;
-            border-bottom: 4px solid var(--pastel-purple);
+            border-bottom: 6px solid var(--pastel-morado);
         }
 
-        .logo-escuela {
-            font-size: 2.8rem;
+        .nombre-escuela {
+            font-size: 3.5rem;
             margin: 0;
-            color: var(--text-black);
+            color: var(--negro);
             text-shadow: 2px 2px white;
         }
 
-        .info-escuela {
+        .promo-banner {
             background: white;
             max-width: 800px;
             margin: 15px auto;
-            padding: 15px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            font-size: 1.1rem;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            line-height: 1.6;
         }
 
-        .btn-llamar {
+        .btn-inscripcion {
             display: inline-block;
-            background-color: var(--success-green);
+            background-color: var(--exito-verde);
             color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
+            padding: 15px 30px;
             text-decoration: none;
+            border-radius: 50px;
             font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid var(--azul-oscuro);
             margin-top: 10px;
-            transition: transform 0.2s;
         }
 
-        .btn-llamar:hover { transform: scale(1.05); }
-
-        /* --- GRID DE GLOBOS (ESTILO LECTORCITO) --- */
+        /* --- MENU DE GLOBOS (ABECEDARIO) --- */
         .alphabet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
             padding: 40px 20px;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .balloon {
-            height: 120px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            width: 100px;
+            height: 130px;
+            border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
             font-weight: bold;
-            color: var(--text-black); /* Letras negras para visualización */
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
             position: relative;
+            color: var(--negro); /* Letra del globo negra para contraste */
+            box-shadow: inset -5px -10px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
-        .balloon:hover { transform: translateY(-15px) rotate(5deg); }
+        .balloon:hover { transform: translateY(-10px) rotate(5deg); }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            width: 2px; height: 25px;
+            background: #999;
+        }
 
-        /* --- INTERFAZ DE EJERCICIO --- */
+        /* --- INTERFAZ DE TAREA --- */
         #game-portal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff;
+            background: white;
             z-index: 1000;
             flex-direction: column;
             align-items: center;
             overflow-y: auto;
-            padding-bottom: 50px;
-        }
-
-        .exercise-header {
-            width: 100%;
             padding: 20px;
-            background: var(--pastel-yellow);
-            text-align: center;
-            border-bottom: 5px solid var(--pastel-pink);
+            box-sizing: border-box;
         }
 
-        .word-to-learn {
-            font-size: 4rem;
-            letter-spacing: 10px;
-            color: var(--text-main);
+        .palabra-guia {
+            font-size: 5rem;
+            color: var(--azul-oscuro); /* Letras arriba oscuras */
+            font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 10px;
             margin: 20px 0;
-            font-weight: 900;
+            text-shadow: 2px 2px #eee;
         }
 
         .drop-zone {
             display: flex;
             gap: 15px;
             margin: 30px 0;
-            min-height: 100px;
+            min-height: 110px;
         }
 
         .slot {
-            width: 110px;
-            height: 90px;
-            border: 4px dashed var(--text-main);
-            border-radius: 15px;
+            width: 120px;
+            height: 100px;
+            border: 4px dashed var(--azul-oscuro);
+            border-radius: 20px;
+            background: #fdfdfd;
+            font-size: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            background: #f9f9f9;
+            color: var(--azul-oscuro);
         }
 
-        .syllable-pool {
+        .slot.wrong { background-color: var(--error-rojo) !important; color: white; border-color: #800; animation: shake 0.5s; }
+        .slot.correct { background-color: var(--exito-verde) !important; color: white; border-color: #1e5e2f; }
+
+        .pool {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            padding: 20px;
             max-width: 800px;
+            padding: 20px;
         }
 
-        .syllable-card {
-            padding: 20px 30px;
+        .syllable {
+            padding: 20px 35px;
             background: white;
-            border: 3px solid var(--text-main);
-            border-radius: 15px;
-            font-size: 1.8rem;
+            border: 3px solid var(--azul-oscuro); /* Letras abajo oscuras */
+            border-radius: 20px;
+            font-size: 2rem;
             font-weight: bold;
-            color: var(--text-main);
             cursor: pointer;
-            box-shadow: 0 5px 0 var(--text-main);
-            transition: 0.1s;
+            color: var(--azul-oscuro);
+            box-shadow: 0 8px 0 var(--azul-oscuro);
         }
 
-        .syllable-card:active {
-            transform: translateY(4px);
-            box-shadow: none;
-        }
-
-        /* --- ESTADOS DE ERROR --- */
-        .slot.wrong {
-            background-color: var(--error-red);
-            border-color: #800;
-            color: white;
-            animation: shake 0.5s;
-        }
+        .syllable:active { transform: translateY(4px); box-shadow: none; }
 
         @keyframes shake {
-            0%, 100% {transform: translateX(0);}
-            25% {transform: translateX(-10px);}
-            75% {transform: translateX(10px);}
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
         /* --- FOOTER --- */
         footer {
-            background: #222;
-            color: #ddd;
-            padding: 30px;
+            background-color: #222;
+            color: #fff;
+            padding: 40px 20px;
             text-align: center;
             margin-top: auto;
         }
 
-        footer a { color: var(--pastel-blue); text-decoration: none; }
+        footer a { color: var(--pastel-azul); text-decoration: none; font-weight: bold; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="logo-escuela">Genio Visión</h1>
-        <div class="info-escuela">
-            <p><strong>Ubicación:</strong> Los Guayos, referencia por el elevado.</p>
-            <a href="https://maps.app.goo.gl/Yco82LzVs3sJVcDS7" target="_blank" style="color:var(--text-main); font-weight:bold;">📍 Haz clic aquí para ver nuestra ubicación (Globo)</a>
-            <br><br>
-            <a href="tel:04244517644" class="btn-llamar">📞 Inscribir al niño: 0424-4517644</a>
+        <h1 class="nombre-escuela">Genio Visión</h1>
+        <div class="promo-banner">
+            <p><strong>Ubicación:</strong> Los Guayos, Edo. Carabobo. Referencia: Cerca del <strong>Elevado</strong>.</p>
+            <a href="https://maps.app.goo.gl/Yco82LzVs3sJVcDS7" target="_blank" style="color:var(--azul-oscuro); font-weight:bold;">📍 Haz clic para ver el Globo de Ubicación</a>
+            <p>Potenciamos el talento de tus hijos con tareas dirigidas personalizadas.</p>
+            <a href="tel:04244517644" class="btn-inscripcion">📞 ¡Inscríbelo ya! 0424-4517644</a>
         </div>
     </header>
 
-    <main class="alphabet-grid" id="grid"></main>
+    <main class="alphabet-grid" id="main-grid"></main>
 
     <div id="game-portal">
-        <div class="exercise-header">
-            <button onclick="closePortal()" style="float:left; padding:10px; border-radius:10px; cursor:pointer;">⬅ VOLVER</button>
-            <h2 id="current-letter-title" style="margin:0;">Letra A</h2>
-            <p id="exercise-counter">Ejercicio 1 de 15</p>
-        </div>
-
-        <div class="word-to-learn" id="word-display">PALABRA</div>
+        <button onclick="closeGame()" style="align-self: flex-start; padding: 10px 20px; border-radius: 10px; cursor: pointer; border: 2px solid var(--azul-oscuro);">⬅ Volver al Abecedario</button>
         
-        <p style="font-size: 1.2rem;">Arma la palabra seleccionando las sílabas correctas:</p>
+        <p id="progress-text" style="font-weight: bold; font-size: 1.2rem; margin-top: 10px;">Ejercicio 1 de 15</p>
+        
+        <div class="palabra-guia" id="hint-word">---</div>
         
         <div class="drop-zone" id="slots-container"></div>
-        <div class="syllable-pool" id="pool-container"></div>
-
-        <div id="feedback" style="font-size: 2rem; margin-top: 20px; height: 40px;"></div>
+        <div class="pool" id="syllables-pool"></div>
+        
+        <div id="status-msg" style="font-size: 2rem; font-weight: bold; margin-top: 20px;"></div>
     </div>
 
     <footer>
         <p>Agradecimientos a la empresa de marketing <strong><a href="https://github.com/jhonmalorne/nexus.net/deployments" target="_blank">Nexus Marketing.Net</a></strong></p>
-        <p>Diseño Web Profesional | Contacto: <strong>0424-4525765</strong></p>
+        <p>Desarrollado para Genio Visión | Especialista en Marketing & Pedagogía</p>
+        <p>📲 Contacto Desarrollador: <strong>0424-4525765</strong></p>
     </footer>
 
     <script>
-        const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
-        const colors = ['#B3E5FC', '#F8BBD0', '#C8E6C9', '#FFF9C4', '#E1BEE7'];
-        
-        // --- BASE DE DATOS PEDAGÓGICA (15 EJERCICIOS POR LETRA) ---
-        // Aquí he estructurado la lógica para que cada letra tenga sus palabras.
-        const exercisesData = {
-            'M': ['MAMA', 'MIMO', 'MESA', 'MULA', 'MAMU', 'MATE', 'MONO', 'MOTO', 'MAPA', 'META', 'MISA', 'MURO', 'MANO', 'MAIZ', 'MODA'],
-            'P': ['PAPA', 'PIPA', 'PEPE', 'PUMA', 'PASO', 'PISO', 'PALA', 'PERA', 'PILA', 'PICO', 'POZO', 'PIANO', 'POMO', 'PUÑO', 'PESO'],
-            'S': ['SAPO', 'SUMA', 'SOPA', 'SOLA', 'SEIS', 'SACO', 'SEDA', 'SILLA', 'SIRENA', 'SALA', 'SOPA', 'SUELO', 'SIMA', 'SOPA', 'SANO']
-            // El script autogenerará palabras para el resto de letras si no están definidas
+        // --- BASE DE DATOS PEDAGÓGICA: 15 PALABRAS POR LETRA ---
+        const dictionary = {
+            'A': ['ABEJA', 'ARBOL', 'ANILLO', 'AVION', 'ARCO', 'ANCLA', 'ARROZ', 'AREPA', 'AGUA', 'ARENA', 'AZUL', 'ASTRO', 'AVISPA', 'AMOR', 'ALMA'],
+            'B': ['BOTA', 'BOLA', 'BATE', 'BURRO', 'BOCA', 'BARCO', 'BALON', 'BOTON', 'BATA', 'BANCO', 'BOTE', 'BOLA', 'BEBE', 'BUHO', 'BATA'],
+            'C': ['CASA', 'COCO', 'CUNA', 'CAMA', 'COLA', 'CARRO', 'CENA', 'COPA', 'CAFE', 'CINE', 'CABO', 'CELU', 'CIMA', 'CAPA', 'CERA'],
+            'D': ['DADO', 'DEDO', 'DAMA', 'DUDA', 'DONA', 'DINO', 'DIENTE', 'DOCE', 'DARDO', 'DIOS', 'DUNA', 'DUENDE', 'DULCE', 'DATO', 'DIAL'],
+            'E': ['ELEFANTE', 'ENANO', 'ESCOBA', 'ESPEJO', 'ESTRELLA', 'ELOTE', 'ERIZO', 'ESPADA', 'EMU', 'ERIZO', 'ESCA', 'ESTE', 'EJE', 'ECO', 'EDAD'],
+            'F': ['FOCA', 'FOTO', 'FUEGO', 'FAMA', 'FASE', 'FARO', 'FEA', 'FINA', 'FOCO', 'FUSA', 'FILA', 'FORO', 'FOTO', 'FRIO', 'FUERTE'],
+            'G': ['GATO', 'GOTA', 'GOMA', 'GUSA', 'GAS', 'GALA', 'GEMA', 'GIRA', 'GOL', 'GUIA', 'GEN', 'GOLP', 'GAYO', 'GORRA', 'GUANTE'],
+            'H': ['HADA', 'HELO', 'HIGO', 'HOJA', 'HUMO', 'HORA', 'HILO', 'HATO', 'HUEVO', 'HUGO', 'HOLA', 'HURT', 'HUESO', 'HABO', 'HIELO'],
+            'I': ['IMAN', 'IGLU', 'ISLA', 'IDEA', 'IR', 'ITEM', 'ISA', 'IODO', 'IRIS', 'IGNA', 'IJAR', 'INCA', 'INGA', 'IDOL', 'IZAR'],
+            'J': ['JARRA', 'JEFE', 'JIRAFA', 'JOYA', 'JUGO', 'JAULA', 'JABON', 'JOTA', 'JUEZ', 'JULIO', 'JACA', 'JALE', 'JEMA', 'JIRA', 'JUAN'],
+            'L': ['LUNA', 'LOMA', 'LUPA', 'LORO', 'LANA', 'LIMA', 'LEON', 'LATA', 'LAGO', 'LECHE', 'LISO', 'LONA', 'LOTE', 'LUZ', 'LIRIO'],
+            'M': ['MAMA', 'MESA', 'MIMO', 'MULA', 'MOTO', 'MANO', 'MAPA', 'META', 'MISA', 'MONO', 'MURO', 'MAIZ', 'MODA', 'MAMA', 'MIEL'],
+            'N': ['NUBE', 'NIDO', 'NOTA', 'NENA', 'NUDO', 'NAVE', 'NARIZ', 'NETO', 'NUEZ', 'NILO', 'NENE', 'NADA', 'NATA', 'NIVE', 'NORA'],
+            'P': ['PAPA', 'PERRO', 'PISO', 'PUMA', 'PALA', 'PICO', 'PILA', 'PERA', 'POZO', 'PIÑA', 'PATO', 'PELO', 'PULPO', 'PIPA', 'POCO'],
+            'S': ['SAPO', 'SOPA', 'SUMA', 'SOLA', 'SEIS', 'SACO', 'SEDA', 'SILLA', 'SALA', 'SOPA', 'SUELO', 'SIMA', 'SANO', 'SOL', 'SITO']
+            // El sistema autocompletará las letras faltantes dinámicamente si no están definidas
         };
 
-        let currentLetter = "";
-        let currentIndex = 0;
+        const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
+        const colors = ['var(--pastel-rosa)', 'var(--pastel-azul)', 'var(--pastel-verde)', 'var(--pastel-amarillo)', 'var(--pastel-morado)'];
+        
+        let currentLetter = '';
+        let currentExerciseIndex = 0;
         let userSelection = [];
 
-        // Generar Globos
-        const grid = document.getElementById('grid');
+        // --- INICIALIZACIÓN ---
+        const grid = document.getElementById('main-grid');
         alphabet.forEach((letter, i) => {
             const b = document.createElement('div');
             b.className = 'balloon';
             b.textContent = letter;
             b.style.backgroundColor = colors[i % colors.length];
-            b.onclick = () => openPortal(letter);
+            b.onclick = () => openGame(letter);
             grid.appendChild(b);
         });
 
-        function openPortal(letter) {
+        function openGame(letter) {
             currentLetter = letter;
-            currentIndex = 0;
+            currentExerciseIndex = 0;
             document.getElementById('game-portal').style.display = 'flex';
-            loadExercise();
+            loadLevel();
         }
 
-        function closePortal() {
+        function closeGame() {
             document.getElementById('game-portal').style.display = 'none';
         }
 
-        function loadExercise() {
-            const letterTitle = document.getElementById('current-letter-title');
-            const counter = document.getElementById('exercise-counter');
-            const wordDisplay = document.getElementById('word-display');
-            const slotsContainer = document.getElementById('slots-container');
-            const poolContainer = document.getElementById('pool-container');
-            const feedback = document.getElementById('feedback');
+        function loadLevel() {
+            const container = document.getElementById('slots-container');
+            const pool = document.getElementById('syllables-pool');
+            const hint = document.getElementById('hint-word');
+            const progress = document.getElementById('progress-text');
+            const status = document.getElementById('status-msg');
 
-            // Limpiar
-            slotsContainer.innerHTML = "";
-            poolContainer.innerHTML = "";
-            feedback.textContent = "";
+            container.innerHTML = '';
+            pool.innerHTML = '';
+            status.textContent = '';
             userSelection = [];
 
-            letterTitle.textContent = `Letra ${currentLetter}`;
-            counter.textContent = `Ejercicio ${currentIndex + 1} de 15`;
+            // Obtener palabra (o generar una de respaldo)
+            let wordList = dictionary[currentLetter] || Array.from({length:15}, (_,i) => currentLetter + "A" + (i+1));
+            let word = wordList[currentExerciseIndex];
+            
+            hint.textContent = word;
+            progress.textContent = `Ejercicio ${currentExerciseIndex + 1} de 15`;
 
-            // Obtener palabra
-            let word = (exercisesData[currentLetter]) ? exercisesData[currentLetter][currentIndex] : currentLetter + "A" + "LA";
-            wordDisplay.textContent = word;
-
-            // Separar en sílabas (lógica de 2 en 2 para este ejemplo educativo)
+            // Dividir en sílabas (Lógica simple para demostración)
+            // En un sistema real se usaría una librería de silabeo más compleja
             let syllables = word.match(/.{1,2}/g); 
             
-            // Crear Slots
+            // Crear espacios de destino
             syllables.forEach(() => {
-                const s = document.createElement('div');
-                s.className = 'slot';
-                slotsContainer.appendChild(s);
+                const slot = document.createElement('div');
+                slot.className = 'slot';
+                container.appendChild(slot);
             });
 
-            // Crear Pool de opciones (mezclado + distractores)
+            // Crear sílabas para elegir (Mezcladas + Distractores)
             let options = [...syllables, "TA", "LO", "RE"].sort(() => Math.random() - 0.5);
-            
-            options.forEach(sylText => {
-                const card = document.createElement('div');
-                card.className = 'syllable-card';
-                card.textContent = sylText;
-                card.onclick = () => selectSyllable(card, sylText, syllables);
-                poolContainer.appendChild(card);
+            options.forEach(s => {
+                const btn = document.createElement('div');
+                btn.className = 'syllable';
+                btn.textContent = s;
+                btn.onclick = () => selectSyllable(btn, s, syllables);
+                pool.appendChild(btn);
             });
         }
 
-        function selectSyllable(card, text, correctSyllables) {
+        function selectSyllable(btn, val, correctSyllables) {
             const slots = document.querySelectorAll('.slot');
             let nextSlot = Array.from(slots).find(s => !s.textContent);
 
             if (nextSlot) {
-                nextSlot.textContent = text;
-                card.style.visibility = "hidden";
-                userSelection.push(text);
+                nextSlot.textContent = val;
+                btn.style.visibility = 'hidden';
+                userSelection.push(val);
 
                 if (userSelection.length === correctSyllables.length) {
-                    checkResult(correctSyllables);
+                    checkAnswer(correctSyllables);
                 }
             }
         }
 
-        function checkResult(correctSyllables) {
+        function checkAnswer(correctArr) {
             const slots = document.querySelectorAll('.slot');
-            const feedback = document.getElementById('feedback');
-            const isCorrect = JSON.stringify(userSelection) === JSON.stringify(correctSyllables);
+            const isCorrect = JSON.stringify(userSelection) === JSON.stringify(correctArr);
 
             if (isCorrect) {
-                feedback.textContent = "¡Excelente! 🌟";
-                feedback.style.color = "var(--success-green)";
+                slots.forEach(s => s.classList.add('correct'));
+                document.getElementById('status-msg').textContent = "¡Muy bien! 🌟";
+                document.getElementById('status-msg').style.color = "var(--exito-verde)";
+                
                 setTimeout(() => {
-                    if (currentIndex < 14) {
-                        currentIndex++;
-                        loadExercise();
+                    if (currentExerciseIndex < 14) {
+                        currentExerciseIndex++;
+                        loadLevel();
                     } else {
-                        alert("¡Felicidades! Terminaste la tarea de la letra " + currentLetter);
-                        closePortal();
+                        alert("¡Felicidades! Completaste los 15 ejercicios de la letra " + currentLetter);
+                        closeGame();
                     }
                 }, 1500);
             } else {
-                feedback.textContent = "¡Inténtalo de nuevo! ❌";
-                feedback.style.color = "var(--error-red)";
                 slots.forEach(s => s.classList.add('wrong'));
+                document.getElementById('status-msg').textContent = "¡Vuelve a intentarlo! ❌";
+                document.getElementById('status-msg').style.color = "var(--error-rojo)";
                 
                 setTimeout(() => {
-                    loadExercise(); // Reiniciar el ejercicio
+                    loadLevel(); // Reiniciar ejercicio
                 }, 1200);
             }
         }
